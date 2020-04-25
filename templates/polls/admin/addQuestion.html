@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+
+<form method="post">{% csrf_token %}
+
+    Question:<br>
+    <input type="text" name="question"/><br>
+    Answers:<br>
+    <div id="answers">
+        <label>1</label>
+        <input type="text" name="answer[]"/><input type="checkbox" name="correct[0]"><br>
+    </div>
+    <button type="button" id="add-btn">+</button>
+    <button type="button" id="sub-btn">-</button>
+    <button type="submit">apply</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" charset="utf-8"></script>
+
+<script>
+    var index = 1;
+    $("#add-btn").on('click', () => {
+        index++;
+        let newAnswer =
+            '<label>' + index + '</label>'
+            +' <input type="text" name="answer[]">'+
+            '<input type="checkbox" name="correct['+index+']">' +
+            '<br>';
+        $("#answers").append(newAnswer);
+
+    });
+    $("#sub-btn").on('click', () => {
+        index--;
+        $('#answers input[type = text]').last().remove();
+        $('#answers label').last().remove();
+        $('#answers br').last().remove();
+        $("#answers input[type = checkbox] ").last().remove();
+    });
+</script>
+</body>
+</html>

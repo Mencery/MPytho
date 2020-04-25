@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+</head>
+<body>
+<form id="login-form">
+    <div class="input_msg_write">
+        <p>Input Name: </p>
+        <input class="write_msg" type="text" id="user-name"/>
+        <button type="button" class="msg_user_btn" id="login-submit">Submit</button>
+    </div>
+</form>
+<div id="questions" hidden>
+    {% if question_wrappers != None %}
+        <form action="answer/" method="post">
+        {% csrf_token %}
+            {% for qw in question_wrappers %}
+
+                <p>{{ qw.question.question }}</p>
+                {% for  key in qw.answers.keys %}
+                    <input type="checkbox" value="{{ key.id }}"  name="{{qw.question.id}}" > {{ key.answer }}<br>
+                {% endfor %}
+
+                </tr>
+            {% endfor %}
+            <button>Answer</button>
+        </form>
+    {% endif %}
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" charset="utf-8"></script>
+<script>
+    $('#login-submit').on('click', () => {
+        console.log(1);
+        let userName = $('#user-name').val();
+        $.ajax({
+            type: 'GET',
+            async: true,
+            url: '',
+            data: "userName=" + userName,
+            success: function () {
+                $('#login-form').hide();
+                $('#questions').show();
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

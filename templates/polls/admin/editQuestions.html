@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+
+<table border="1px">
+    <tr>
+        <th>
+            Question:
+        </th>
+        <th>
+            Answers:
+        </th>
+    </tr>
+    {% for qw in question_wrappers %}
+        <tr>
+            <td><textarea data-id={{ qw.question.id }}""  name="question[{{ qw.id }}]" rows="4"
+                          cols="20">{{ qw.question.question }}</textarea></td>
+            {% for  key, value in qw.answers.items %}
+                <td>
+                    <textarea data-id={{ key.id }} name="name" rows="2" cols="20">{{ key.answer }}</textarea>
+
+                    <input data-id={{ key.id }} type="checkbox" {% if value %}checked{% endif %}>
+                    <button data-id={{ key.id }}>remove</button>
+                </td>
+            {% endfor %}
+
+            <td>
+                <button data-id={{ qw.question.id }}>Delete</button>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" charset="utf-8"></script>
+
+<script>
+
+</script>
+</body>
+</html>

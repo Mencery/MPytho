@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+</head>
+<body>
+<table border="1px">
+<tr><th>Question</th><th>Answer correctly</th></tr>
+{% for q, s in question_statistics.items %}
+    <tr>
+    <td>{{ q }}</td>
+    <td>{{ s }}%</td>
+    </tr>
+{% endfor %}
+</table>
+</body>
+</html>
